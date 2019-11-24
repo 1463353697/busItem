@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 3% 10% 0% 10%;
+        }
+        #header {
+            display: flex;
+            
+            
+
+            width: 1690px;
+            height: 50px;
+            background-color: aquamarine;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #content {
+            display: flex;
+            flex-direction: column;
+        }
+        #content-route {
+            display: flex;
+            flex-direction: column;
+            
+        }
+        #route-choose {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        #route-select {
+            margin-left: 10px;
+            width: 100px;
+            height: 30px;
+
+        }
+        #route-im {
+            width: 1690px;
+            height: 200px;
+            background-color: antiquewhite;
+
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #content-flow {
+            display: flex;
+            flex-direction: row;
+        }
+        #knowed {
+            width: 845px;
+            height: 600px;
+            background-color: brown;
+
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #calculate {
+            width: 845px;
+            height: 600px;
+            background-color: aquamarine;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #bus-add {
+            width: 1690px;
+            height: 400px;
+            background-color: bisque;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h3>公交线路客流量预测</h3>
+    </div>
+    <div id="content">
+        <div id="content-route">
+            <div id="route-choose">
+                <p>请选择公交路线</p>
+                <select id="route-select">
+                    <option value="1号线">1号线</option>
+                    <option value="2号线">2号线</option>
+                    <option value="3号线">3号线</option>
+                    <option value="4号线">4号线</option>
+                </select>
+            </div>
+            <div id="route-im">
+                <h2>这里是公交线路的信息（ECharts极坐标系)</h2>
+            </div>
+        </div>
+        <div id="content-flow">
+            <div id="knowed"><h2>六月数据（ECharts）</h2></div>
+            <div id="calculate"><h2>预测七月数据（ECharts）</h2></div>
+            
+        </div>
+        <div id="bus-add"><h2>增加公交车数量</h2></div>
+    </div>
+    
+</body>
+</html>
