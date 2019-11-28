@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="echarts.js"></script>
     <style type="text/css">
         * {
             margin: 0;
@@ -45,10 +46,15 @@
             height: 30px;
 
         }
+        #we-flow {
+            width: 845px;
+            height: 600px;
+        }
         #route-im {
-            width: 1690px;
-            height: 200px;
-            background-color: antiquewhite;
+            /* width: 1690px;
+            height: 200px; */
+            /* background-color: antiquewhite; */
+            flex-direction: column;
 
 
             display: flex;
@@ -62,7 +68,7 @@
         #knowed {
             width: 845px;
             height: 600px;
-            background-color: brown;
+            
 
 
             display: flex;
@@ -72,7 +78,7 @@
         #calculate {
             width: 845px;
             height: 600px;
-            background-color: aquamarine;
+            
 
             display: flex;
             align-items: center;
@@ -108,91 +114,194 @@
             </div>
             <div id="route-im">
                 <h2>这里是公交线路的信息（ECharts极坐标系)</h2>
+                <div id="route-we">
+                    <div id="date-choose">
+                        日期选择
+                    </div>
+                    <div id="we-flow">
+                        <h2>公交线路情况（近一周天气和客流量）</h2>
+                    </div>
+                </div>
             </div>
+            
+
         </div>
         <div id="content-flow">
-            <div id="knowed"><h2>六月数据（ECharts）</h2></div>
-            <div id="calculate"><h2>预测七月数据（ECharts）</h2></div>
+            <div id="knowed"><h2>当月数据（ECharts）</h2></div>
+            <div id="calculate"><h2>预测下月数据（ECharts）</h2></div>
             
         </div>
         <div id="bus-add"><h2>增加公交车数量</h2></div>
     </div>
     <script type="text/javascript">
-        var station = [
-            {
-               "id":"1",
-                "stations":[
-                    {
-                        "name":"崇文路口",
-                        "x": "120",
-                        "y": "150"
-                    },
-                    {
-                        "name":"黄桷垭",
-                        "x": "120",
-                        "y": "150"
-                    },
-                    {
-                        "name":"崇文路口",
-                        "x": "120",
-                        "y": "150"
-                    }
-                ]
-                    
-                
-                
-            },
-            {
-               "id":"2",
-                "stations":[
-                    {
-                        "name":"崇文路口",
-                        "x": "120",
-                        "y": "150"
-                    },
-                    {
-                        "name":"崇文路口",
-                        "x": "120",
-                        "y": "150"
-                    },
-                    {
-                        "name":"崇文路口",
-                        "x": "120",
-                        "y": "150"
-                    }
-                ]
-                    
-                
-                
-            },
-            {
-               "id":"3",
-                "stations":[
-                    {
-                        "name":"崇文路口",
-                        "x": "120",
-                        "y": "150"
-                    },
-                    {
-                        "name":"崇文路口",
-                        "x": "120",
-                        "y": "150"
-                    },
-                    {
-                        "name":"崇文路口",
-                        "x": "120",
-                        "y": "150"
-                    }
-                ]
-                    
-                
-                
+        function knowedChart(){
+            var knowed = echarts.init(document.getElementById("knowed"));
+            var xAxisData = [];
+            var data1 = [];
+
+            for (var i = 0; i < 31; i++) {
+                xAxisData.push( i);
+                data1.push((Math.random()*1000));
+            
             }
-        ]
-        
-        console.log(station);
-        console.log(station[0].stations[1].name);
-        
+
+            option = {
+                title: {
+                    text: '当月数据'
+                },
+                legend: {
+                    data: ['bar', 'bar2'],
+                    align: 'left'
+                },
+                toolbox: {
+                    // y: 'bottom',
+                    feature: {
+                        magicType: {
+                            type: ['stack', 'tiled']
+                        },
+                        dataView: {},
+                        saveAsImage: {
+                            pixelRatio: 2
+                        }
+                    }
+                },
+                tooltip: {},
+                xAxis: {
+                    data: xAxisData,
+                    silent: false,
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                },
+                series: [{
+                    name: 'bar',
+                    type: 'bar',
+                    data: data1,
+                    animationDelay: function (idx) {
+                        return idx * 10;
+                    }
+                }],
+                animationEasing: 'elasticOut',
+                animationDelayUpdate: function (idx) {
+                    return idx * 5;
+                }
+            };
+            
+            knowed.setOption(option);
+
+        }
+        function calculateChart(){
+            var calculate = echarts.init(document.getElementById("calculate"));
+            var xAxisData = [];
+            var data1 = [];
+
+            for (var i = 0; i < 31; i++) {
+                xAxisData.push( i);
+                data1.push((Math.random()*1000));
+            
+            }
+
+            option = {
+                title: {
+                    text: '预测下月数据'
+                },
+                legend: {
+                    data: ['bar', 'bar2'],
+                    align: 'left'
+                },
+                toolbox: {
+                    // y: 'bottom',
+                    feature: {
+                        magicType: {
+                            type: ['stack', 'tiled']
+                        },
+                        dataView: {},
+                        saveAsImage: {
+                            pixelRatio: 2
+                        }
+                    }
+                },
+                tooltip: {},
+                xAxis: {
+                    data: xAxisData,
+                    silent: false,
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                },
+                series: [{
+                    name: 'bar',
+                    type: 'bar',
+                    data: data1,
+                    animationDelay: function (idx) {
+                        return idx * 10;
+                    }
+                }],
+                animationEasing: 'elasticOut',
+                animationDelayUpdate: function (idx) {
+                    return idx * 5;
+                }
+            };
+            
+            calculate.setOption(option);
+
+        }
+        function weAndflow(){
+            var weFlow = echarts.init(document.getElementById('we-flow'));
+            option = {
+                title: {
+                    text: '一周温度'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['最高温度','最低温度']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['周一','周二','周三','周四','周五','周六','周日']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name:'最高温度',
+                        type:'line',
+                        stack: '总量',
+                        data:[20, 22, 25, 21, 23, 22, 21]
+                    },
+                    {
+                        name:'最低温度',
+                        type:'line',
+                        stack: '总量',
+                        data:[11, 12, 15, 9,17, 11, 13]
+                    }
+                ]
+            };
+            weFlow.setOption(option);
+
+        }
+        knowedChart();
+        calculateChart();
+        weAndflow();
         
     </script>
     
