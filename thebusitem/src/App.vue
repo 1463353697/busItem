@@ -3,16 +3,36 @@
     <div id="header">
         <h3>公交线路客流量预测</h3>
     </div>
-    <routeChoose></routeChoose>
+    <routeChoose  @idTrans="getIdPath"></routeChoose>
+    <weatherCheck></weatherCheck>
+    <theFlow :flowId="theId"></theFlow>
   </div>
 </template>
 
 <script>
 import routeChoose from './components/routeChoose.vue'
+import weatherCheck from './components/weatherCheck.vue'
+import theFlow from './components/theFlow.vue'
 export default {
   name: 'App',
   components:{
-    routeChoose
+    routeChoose,
+    weatherCheck,
+    theFlow 
+
+  },
+  data(){
+    return {
+
+      // 这是选择线路之后从routeChoose组件里面得到的线路id值
+      theId:''
+    }
+  },
+  methods:{
+    getIdPath(data){
+      this.theId = data;
+      // console.log(this.theId);
+    }
 
   }
 }
@@ -22,9 +42,6 @@ export default {
   * {
       margin: 0;
       padding: 0;
-    }
-    body {
-      margin: 3% 10% 0% 10%;
     }
     #header {
       display: flex;      
