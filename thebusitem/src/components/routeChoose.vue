@@ -144,7 +144,7 @@ export default {
   }
   .station-map {
     width: 100%;
-    height: 700px;
+    height: 300px;
    
   }
 
