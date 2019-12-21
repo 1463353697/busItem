@@ -67,6 +67,7 @@ export default {
       var routeIndex = routeSelect.selectedIndex;
       var selectedId = routeSelect.options[routeIndex].value;
 
+
       this.thePathId = selectedId;
 
       // 把这个值传给父组件
@@ -123,8 +124,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .routeBlock {
-  width: 80%;
-  margin-left: 10%;
+  width: 100%;
+  /* margin-left: 10%; */
 }
   #route-choose {
     display: flex;
@@ -138,13 +139,14 @@ export default {
 
   }
   #stations-info {
-    background-color: pink;
-    width: 100%;
-    height: 700px;
+    /* background-color: pink; */
+    width: 80%;
+    height: 400px;
   }
   .station-map {
     width: 100%;
-    height: 300px;
+    height: 400px;
+    margin-left: 10%;
    
   }
 

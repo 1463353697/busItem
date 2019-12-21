@@ -1,5 +1,8 @@
 <template>
     <div class="flowblock">
+
+
+        <!-- 这里绑定的flowId值是从父组件那里传过来的 -->
         <div class="station-info">已选择公交线路：{{flowId}}</div>
         <div class="flow-info">
             <div class="choose-month">
@@ -14,8 +17,12 @@
                 </select>
             </div>
             <div class="flow-charts">
-                <div id="echarts1"></div>
-                <div id="echarts2"></div>
+                <div id="someMsg">请选择月份和线路之后再查看客流量图</div>
+                <div class="thecharts">
+                    <div id="echarts1"></div>
+                    <div id="echarts2"></div>
+                </div>
+                
 
             </div>
         </div>
@@ -41,8 +48,7 @@ export default {
     
     mounted:
     function(){
-        // console.log(this.flowId);
-        // console.log("lll");
+        
 
     },
     methods:{
@@ -53,20 +59,25 @@ export default {
             //获得选择的月份的值
             var theMonth = monthSelect.options[monthIndex].value;
             
-            
+            //这里是从父组件那里得到的传过来的已选择id路径的值
             var theid = this.flowId;
             
 
             //暂时先看id筛选出数据
             var theIdFlow = [];
+
             //用来存放筛选出来的符合id和月份的数据
             var theFinalFlow = [];
+
             //用来存放符合所有条件的最后的客流量数据数组
             var monthDays = [];
 
             
             // 这里在对月份数据进行筛选，但遇到了问题:substring方法无法识别，
             //为了不耽误进度先这样：先取出符合已选择id线路的数据，然后再根据选择的月份根据每月的天数筛选
+
+
+            //这里先把flowData里面符合已选择id值的数据全部放进theIdFlow数组里面
             for(var i =0,len = flowData.length;i<len;i++){
                 if(flowData[i].id == theid){
                     theIdFlow.push(flowData[i]);
@@ -75,7 +86,7 @@ export default {
             }
            
 
-            //根据月份再筛选数据
+            //根据已选择的月份，即变量theMonth，在符合id值的基础上再选择当月的数据，并且生成当月的天数数组，以供后面的条形图使用
             if(theMonth == 1){
                 for(var i = 0;i<31;i++){
                     theFinalFlow.push(theIdFlow[i]);
@@ -119,7 +130,9 @@ export default {
                 }
                 var monthDays = Array.from(new Array(theFinalFlow.length + 1).keys()).slice(1);
             }
-            //得到最后筛选出来的当月该路线的客流量数据
+
+
+            //因为我们最后在条形图中只显示客流量数据，所以我们把theFinalFlow数组中所有的passenger属性筛出来放在一个数组里面，得到最后筛选出来的当月该路线的客流量数据
             var thePassenger = [];
             for(var i = 0; i<theFinalFlow.length; i++){
                 thePassenger.push(theFinalFlow[i].passenger);
@@ -228,6 +241,8 @@ export default {
                 }]
             };
             flowChart2.setOption(flowOption2);
+            var msg = document.getElementById("someMsg");
+            msg.style.display = "none";
 
 
 
@@ -282,14 +297,30 @@ export default {
         /* background-color: yellow; */
     }
     .flow-charts {
-        display: flex;
+        /* display: flex; */
         width: 100%;
         height: 500px;
+        /* background-color: blueviolet; */
+    
+    }
+    .thecharts {
+        display: flex;
+        /* background-color: green; */
+        height: 100%;
+        width: 100%;
     }
     #echarts1,#echarts2 {
         width: 50%;
         height: 100%;
        
         margin-left: 50px;
+    }
+    #someMsg {
+        width: 60%;
+        font-size: 30px;
+        font-weight: 600;
+        margin-left: 180px;
+        padding-left: 200px;
+        background-color: #97B5D7;
     }
 </style>
